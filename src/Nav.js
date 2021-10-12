@@ -266,7 +266,7 @@ const Nav = ()=>
 
            </div>
            <Transition appear show={close} as={Fragment}>
-                      <div className={` p-8 bg-gray-900 w-screen h-64 ... fixed bottom-0 ... `}>
+                      <div className={` p-8 bg-gray-900 w-screen h-full sm:h-64 ... fixed bottom-0 ... `}>
                       <div>
                         <button onClick={cl}>
                         <svg xmlns="http://www.w3.org/2000/svg"  className="float-right rounded hover:bg-red-900 h-6 w-6 text-white cursor pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
