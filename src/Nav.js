@@ -1,8 +1,8 @@
-import React,{Fragment,useState,useEffect} from 'react';
+import React,{Fragment,useState} from 'react';
 import {Link} from 'react-router-dom';
 import Data from './Data';
-import { Tab,Transition,Dialog} from '@headlessui/react';
-import axios from 'axios';
+import { Tab,Transition} from '@headlessui/react';
+
 
 
 
@@ -26,7 +26,7 @@ const Nav = ()=>
   
   
         const sch = (e) =>
-        { if(e.target.value == "")
+        { if(e.target.value =="")
            {
                 setData('');
           }
@@ -66,7 +66,7 @@ const Nav = ()=>
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ title: email })
                     };
-                   const res = await fetch('http://localhost:5000/email_id', requestOptions);
+                   const res = await fetch('https://newsportalfordatascience.herokuapp.com/email_id', requestOptions);
                    const jsondata = await res.json();
                   setexist(jsondata);
                   if(jsondata=="exist")
@@ -119,16 +119,19 @@ const Nav = ()=>
                   
                     <div className="p-2 space-x-2 ...">
                         
-                    
+           <div className="flex">         
            <Tab as={Fragment}>
          {({ selected }) => (
-           <button onClick={s}
+          <div className=""> <button onClick={s}
              className={
                selected ? 'bg-gray-700 text-white rounded-md ' : 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md'
              }
            >
-             <div><i className=" px-3 py-2 topnav-icons fa fa-home w3-left w3-bar-item w3-button text-white text-2xl pl-2 ... pr-3 ..." ></i></div>
-           </button>
+             <div className="px-3 py-2"><svg xmlns="http://www.w3.org/2000/svg" className="  h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+</svg>
+            </div>
+           </button></div>
          )}
        </Tab>
        <Tab as={Fragment}>
@@ -189,12 +192,19 @@ const Nav = ()=>
        </Tab>
          
        <div className="float-right pt-1 ... pl-8 ... ">
-          <div className="border-2 border-black"> 
+          <div className=" border-black flex"> 
           
-
+              <div>
               <input type="text" onChange={(e) => sch(e)} value={search} className="px-5 py-2 outline-none text-black font-bold border-r-2 border-black  bg-white focus:bg-gray-100" placeholder="Search.." name="search"/>
-                  <button onClick={set} type="submit" ><i className="fa fa-search bg-white text-black px-3 py-3 hover:bg-gray-600"></i></button>
+                  </div>
+                  <div className="hover:bg-gray-600 bg-white border-1 px-1 py-2 border-black"><button onClick={set} type="submit" >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="  text-black w-8 h-4 hover:bg-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+</svg>
+                    </button>
+                    </div>
             </div>
+        </div>
         </div>
            
          </div>
@@ -233,10 +243,14 @@ const Nav = ()=>
           
 
                         <input type="text" onChange={(e) => sch(e)} value={search} className="rounded-l-full px-2  text-gray-700 leading-tight focus:outline-none" placeholder="Search.." name="search"/>
-                        <div className="p-5 sm:p-2">
+                        <div className="p-3 sm:p-2">
 
                         <button onClick={set} class="bg-white  rounded-full   focus:outline-none w-5 h-5 flex items-center justify-center">          
-                                          <i className="fa fa-search text-gray-900 hover:text-gray-700 "></i></button>
+                                          
+                                          <svg xmlns="http://www.w3.org/2000/svg" className="  text-gray-900 hover:text-gray-700 w-8 h-4 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+</svg>
+                                          </button>
                           </div>
                          </div>
                
@@ -266,7 +280,7 @@ const Nav = ()=>
 
            </div>
            <Transition appear show={close} as={Fragment}>
-                      <div className={` p-8 bg-gray-900 w-screen h-full sm:h-64 ... fixed bottom-0 ... `}>
+                      <div className={` p-8 bg-gray-900 w-screen    fixed bottom-0 ... `}>
                       <div>
                         <button onClick={cl}>
                         <svg xmlns="http://www.w3.org/2000/svg"  className="float-right rounded hover:bg-red-900 h-6 w-6 text-white cursor pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -277,18 +291,19 @@ const Nav = ()=>
                           <p className="mb-8 sm:mb-10 leading-relaxed text-white">
                           Want to hear from us when we add new feed? Sign up for our portal and we'll email you every time we release a feed.
                           </p>
-                          <form onSubmit={(e)=>sumit(e)}>
-                          <div className="flex-cols sm:flex sm:space-x-4 ... sm:space-y-0 ... space-y-4 ...">
-                              <div className="">
-                                  <input type="email" value={email} onChange={(e)=>em(e)} className="block  px-3 py-2 sm:px-5 sm:py-3 sm:text-sm bg-gray-700 text-gray-200 rounded-lg placeholder-gray-400 focus:bg-white focus:text-gray-900 focus:outline-none" placeholder="Email address"/>
+                         
+                          <form onSubmit={(e)=>sumit(e)} className="flex items-center justify-center sm:float-left">
+                          <div className=" flex-cols   space-y-4 ...">
+                              <div className=" ">
+                                  <input type="email" value={email} onChange={(e)=>em(e)} className="px-2 block  w-48 py-2 sm:w-64 sm:py-3 sm:text-sm bg-gray-700 text-gray-200 rounded-lg placeholder-gray-400 focus:bg-white focus:text-gray-900 focus:outline-none" placeholder="   Email address"/>
                                   
                                 <div className={`${(exist=="exist")?"block text-red-600":"hidden"}`}>Email already exist</div>
                              
                               </div>
-                              <div className="p-1 sm:p-0">
-                              <div className="text-center w-48  sm:w-24 bg-blue-400 hover:text-blue-400 py-3  hover:bg-white  block text-sm font-semibold  rounded-lg text-white  focus:outline-none   ">     
-                                  <button  className="pl-1 hover:text-blue-400" type="submit">Subscribe</button>
-                            </div>
+                              <div className="sm:p-0">
+                              <input type="submit" className="sm:w-64 text-center bg-blue-400 hover:text-blue-400 block  max-w-lg w-48 sm:w-24 py-2  sm:py-3  hover:bg-white  block text-sm font-semibold  rounded-lg text-white  focus:outline-none   " value="Subscribe"/>   
+                                  
+                           
                             </div>    
                           </div>
                           </form>
