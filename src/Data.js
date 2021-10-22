@@ -13,8 +13,8 @@ const Data =({link,search}) =>
     const getadata = async () =>
     {
         try {
-
-            const res = await fetch(`http://localhost:5000/all/${link}`)
+                
+            const res = await fetch(`https://newsportalfordatascience.herokuapp.com/feeds/${link}`)
             const jsondata = await res.json();
             if(search!= "")
             {
@@ -57,7 +57,7 @@ const Data =({link,search}) =>
                 </br>
 
             {datas.map(data =>(
-              <List  title={data['title']} des={data['descrption']} link={data['link']} src = {data['src']}/>
+              <List  title={data['title']} des={data['description']} link={data['link']} src = {data['src']}/>
               
             ))}
         
